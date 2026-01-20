@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
 class Reporte {
-  final String folio;
+  final int id;
   final String titulo;
-  final String estatus; // "Pendiente", "Aceptado", "Rechazado"
   final String descripcion;
+  final String estatus;
+  final String fechaRegistro;
+  final String? rutaImagen;
 
   Reporte({
-    required this.folio, 
-    required this.titulo, 
-    required this.estatus, 
-    required this.descripcion
+    required this.id,
+    required this.titulo,
+    required this.descripcion,
+    required this.estatus,
+    required this.fechaRegistro,
+    this.rutaImagen,
   });
 
-  // El color azul para pendientes que solicitaste
+  // Indicador de color: Azul para Pendiente, Verde para Aceptado, Rojo para Rechazado
   Color get colorEstatus {
     switch (estatus.toLowerCase()) {
       case 'pendiente': return Colors.blue;
@@ -25,10 +29,13 @@ class Reporte {
 
   factory Reporte.fromJson(Map<String, dynamic> json) {
     return Reporte(
-      folio: json['id'].toString(),
-      titulo: json['titulo'],
-      estatus: json['estatus'],
-      descripcion: json['descripcion'],
+      id: json['id'],
+      titulo: json['titulo'] ?? '',
+      descripcion: json['descripcion'] ?? '',
+      estatus: json['estatus'] ?? 'Pendiente',
+      fechaRegistro: json['fechaRegistro'] ?? '',
+      // Accedemos al objeto anidado de la imagen para sacar la ruta
+      rutaImagen: json['imagen'] != null ? json['imagen']['ruta'] : null,
     );
   }
 }
