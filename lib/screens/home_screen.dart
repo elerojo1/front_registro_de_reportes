@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   radius: 8
                 ),
                 title: Text("Folio: ${item.id} - ${item.titulo}"),
-                subtitle: Text("Fecha: ${item.fechaRegistro.split('T')[0]}"),
+                subtitle: Text("Estatus: ${item.estatus}"),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   // Navegamos pasando el objeto 'item' completo

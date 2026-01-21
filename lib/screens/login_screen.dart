@@ -29,7 +29,16 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Credenciales incorrectas")),
+        SnackBar(
+          content: const Text("Credenciales incorrectas"),
+          behavior: SnackBarBehavior.floating, // Hace que el mensaje flote
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Bordes redondeados
+          margin: const EdgeInsets.only(
+            bottom: 300, // Ajusta esta altura a tu gusto
+            right: 20,
+            left: 20,
+          ),
+        ),
       );
     }
   }

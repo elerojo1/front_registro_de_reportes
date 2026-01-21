@@ -40,7 +40,16 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
     if (_tituloController.text.isEmpty || _descController.text.isEmpty || _imagenSeleccionada == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Complete todos los campos")),
+        SnackBar(
+          content: const Text("Complete todos los campos"),
+          behavior: SnackBarBehavior.floating, // Hace que el mensaje flote
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Bordes redondeados
+          margin: const EdgeInsets.only(
+            bottom: 400, // Ajusta esta altura a tu gusto
+            right: 20,
+            left: 20,
+          ),
+        ),
       );
       return;
     }
@@ -59,11 +68,29 @@ class _RegistroScreenState extends State<RegistroScreen> {
     if (guardado) {
       Navigator.pop(context); // Regresamos al listado
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Reporte enviado correctamente")),
+        SnackBar(
+          content: const Text("Reporte enviado correctamente"),
+          behavior: SnackBarBehavior.floating, // Hace que el mensaje flote
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Bordes redondeados
+          margin: const EdgeInsets.only(
+            bottom: 400, // Ajusta esta altura a tu gusto
+            right: 20,
+            left: 20,
+          ),
+        ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Error al enviar el reporte")),
+        SnackBar(
+          content: const Text("Error al enviar el reporte"),
+          behavior: SnackBarBehavior.floating, // Hace que el mensaje flote
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), // Bordes redondeados
+          margin: const EdgeInsets.only(
+            bottom: 400, // Ajusta esta altura a tu gusto
+            right: 20,
+            left: 20,
+          ),
+        ),
       );
     }
   }

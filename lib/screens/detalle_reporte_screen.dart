@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import '../models/reporte_model.dart';
 
@@ -19,7 +18,7 @@ class DetalleReporteScreen extends StatelessWidget {
           children: [
             _buildInfoSeccion("Título", reporte.titulo),
             _buildInfoSeccion("Descripción", reporte.descripcion),
-            _buildInfoSeccion("Fecha de Registro", reporte.fechaRegistro),
+            _buildInfoSeccion("Fecha de Registro", reporte.fechaRegistroFormateada),
             _buildInfoSeccion("Estatus", reporte.estatus, color: reporte.colorEstatus),
             
             const SizedBox(height: 20),
@@ -27,18 +26,29 @@ class DetalleReporteScreen extends StatelessWidget {
             const SizedBox(height: 10),
             
             // Renderizado de imagen
-            reporte.rutaImagen != null 
-              ? Image.file(File(reporte.rutaImagen!), 
-                  height: 250, 
-                  width: double.infinity, 
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => 
-                    const Icon(Icons.broken_image, size: 100, color: Colors.grey))
-              : const Text("No hay imagen adjunta"),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                "http://10.0.2.2:5192/${reporte.rutaImagen}", // URL hacia tu carpeta uploads
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  height: 200,
+                  color: Colors.grey[200],
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                      Text("Imagen no disponible"),
+                    ],
+                  ),
+                ),
+              ),
+            ),
 
             const Divider(height: 40),
-            const Text("Información de Resolución:", style: TextStyle(fontWeight: FontWeight.bold)),
-            _buildInfoSeccion("Fecha y Usuario de respuesta", "Pendiente de procesar"),
+            _buildInfoSeccion("Fecha y Usuario de respuesta", "${reporte.fechaAutorizacionFormateada} - ${reporte.nombreCompleto ?? 'N/A'}"),
           ],
         ),
       ),
